@@ -11,7 +11,7 @@ import model.Pessoa;
  *
  * @author 182120044
  */
-public class cPessoa {
+public class CPessoa {
 
     ArrayList<Pessoa> pessoas = new ArrayList<>();
     int idPessoa = 1;
@@ -71,7 +71,7 @@ public class cPessoa {
         p1.setEndereco("Rua das Flores");
         Pessoa p2 = new Pessoa();
         p2.setIdPessoa(geraID());
-        p2.setCpf("90189188065");
+        p2.setCpf("91023736020");
         p2.setNome("Jigolo Igor Rodrigues");
         p2.setTelefone("51982547584");
         p2.setEndereco("Rua Heralyto Kile");

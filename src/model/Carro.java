@@ -17,11 +17,12 @@ public class Carro {
     private String tpCambio;
     private String combustivel;
     private Pessoa proprietario; //agregação de calsse model pessoal com carro
-
+    private String placa;
+    
     public Carro() {
     }
 
-    public Carro(String marca, String modelo, int anoFab, int anoMod, String cor, String tpCambio, String combustivel, Pessoa proprietario) {
+    public Carro(String marca, String modelo, int anoFab, int anoMod, String cor, String tpCambio, String combustivel, Pessoa proprietario, String placa) {
         this.marca = marca;
         this.modelo = modelo;
         this.anoFab = anoFab;
@@ -30,8 +31,17 @@ public class Carro {
         this.tpCambio = tpCambio;
         this.combustivel = combustivel;
         this.proprietario = proprietario;
+        this.placa = placa;
     }
 
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+     
     public String getMarca() {
         return marca;
     }
@@ -98,7 +108,7 @@ public class Carro {
 
     @Override
     public String toString() {
-        return "\n---" + "\nMarca:\t" + marca + "\nModelo:\t" 
+        return "\n---" + "\nMarca:\t" + marca+ "\n:\t" + placa + "\nModelo:\t" 
                 + modelo + "\nAnoFab:\t" + anoFab + "\nAnoMod:\t" + anoMod  
                 + "\nCor:\t" + cor + "\nTipo Cambio:\t" + tpCambio 
                 + "\nCombustivel:\t" + combustivel + "\nProprietario:\t" + proprietario.getNome();
