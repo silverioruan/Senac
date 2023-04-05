@@ -69,6 +69,7 @@ public class CPessoa {
         p1.setNome("Jigolo Santos Buteco");
         p1.setTelefone("51982543545");
         p1.setEndereco("Rua das Flores");
+        addPessoa(p1);
         Pessoa p2 = new Pessoa();
         p2.setIdPessoa(geraID());
         p2.setCpf("91023736020");

@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import static inf3n2012.carro.INF3N2012Carro.cadPessoa;
+import static inf3n2012.carro.INF3N212Carro.cadPessoa;
 import java.util.ArrayList;
 import model.Carro;
 
