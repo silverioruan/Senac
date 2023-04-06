@@ -71,4 +71,19 @@ public class Validadores {
             return(CPF.substring(0, 3) + "." + CPF.substring(3, 6) + "." +
             CPF.substring(6, 9) + "-" + CPF.substring(9, 11));
         }
+        public static boolean validarPlaca(String placa) {
+        boolean placaValida = true;
+
+        if (placa.length() > 0) {
+            if (placa.length() < 7) {
+                placaValida = false;
+            } else {
+                if (!placa.matches("[A-Z]{3}[0-9]{1}[A-Z]{1}[0-9]{2}|[A-Z]{3}[0-9]{4}")) {
+                    placaValida = false;
+                }
+            }
+        }
+
+        return placaValida;
+    }
 }

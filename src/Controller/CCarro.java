@@ -50,6 +50,7 @@ public class CCarro {
       c1.setTpCambio("Manual");
       c1.setCombustivel("Fiex");
       c1.setCor("Bege");
+      c1.setPlaca("JAR4574");
       c1.setProprietario(cadPessoa.getPessoaCPF("91023736020"));
       addCarro(c1);
     }

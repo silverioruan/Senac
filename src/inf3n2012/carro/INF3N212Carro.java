@@ -10,7 +10,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import model.Carro;
 import model.Pessoa;
-import sun.security.provider.VerificationProvider;
 import util.Validadores;
 
 /**
@@ -44,32 +43,32 @@ public class INF3N212Carro {
                         opSM = leiaNumInt();
                         switch (opSM) {
                             case 1:
-                                if (opM==1) {
+                                if (opM == 1) {
                                     cadastrarPessoa();
-                                }else{
+                                } else {
                                     cadastrarCarro();
                                 }
                                 break;
                             case 2:
                                 System.out.println("-- Editar --");
-                                if (opM==1) {
+                                if (opM == 1) {
                                     editarPessoa();
-                                }else{
+                                } else {
                                     editarCarro();
                                 }
                                 break;
                             case 3:
-                                if (opM==1) {
+                                if (opM == 1) {
                                     listarPessoa();
-                                }else{
+                                } else {
                                     listarCarro();
                                 }
                                 break;
                             case 4:
                                 System.out.println("-- Deletar --");
-                                if (opM==1) {
+                                if (opM == 1) {
                                     deletarPessoa();
-                                }else{
+                                } else {
                                     deletarCarro();
                                 }
                                 break;
@@ -135,25 +134,25 @@ public class INF3N212Carro {
         String endereco;
         String telefone;
         boolean tcpf = true;
-        
-        do {            
+
+        do {
             System.out.print("Informe o CPF: ");
             cpf = leia.nextLine();
             tcpf = Validadores.isCPF(cpf);
-            if (tcpf){
-                if (cadPessoa.getPessoaCPF(cpf)!=null){
+            if (tcpf) {
+                if (cadPessoa.getPessoaCPF(cpf) != null) {
                     System.out.println("CPF já cadastrado!");
                     System.out.println("1 - Tentar novamente");
                     System.out.println("2 - Cancelar cadastro");
                     System.out.println("Digite aqui: ");
                     int op = leiaNumInt();
-                    if (op==2) {
+                    if (op == 2) {
                         return;
                     }
-                }else{
+                } else {
                     tcpf = false;
                 }
-            }else{
+            } else {
                 System.out.println("CPF inválido!");
                 tcpf = true;
             }
@@ -167,17 +166,25 @@ public class INF3N212Carro {
         idPessoa = cadPessoa.geraID();
         Pessoa p = new Pessoa(idPessoa, nome, cpf, endereco, telefone);
         cadPessoa.addPessoa(p);
-        System.out.println(p.getNome()+ "Cadastrado com sucesso!");
+        System.out.println(p.getNome() + "Cadastrado com sucesso!");
     }
 
     private static void cadastrarCarro() {
-        System.out.println("Carro");
+        System.out.println("-- Cadastrar Carro--");
+        System.out.println("Informe a placa");
+        String placa = leia.nextLine().toUpperCase();
+        if (Validadores.validarPlaca(placa)) {
+            System.out.println("Placa ok!");
+        }else{
+            System.out.println("Deu Ruim!");
+        }
+            
     }
 
     private static void editarPessoa() {
         System.out.println("-- Editar Pessoa --");
         boolean isCPF;
-        do{
+        do {
             System.out.println("Informe o CPF da pessoa a ser editado: ");
             String cpf = leia.nextLine();
             isCPF = Validadores.isCPF(cpf);
@@ -190,36 +197,62 @@ public class INF3N212Carro {
                     System.out.println("3 - Telefone");
                     System.out.println("4 - Todos");
                     System.out.println("0 - Cancelar");
-                }else{
-                    System.out.println("CPF não encontrado!");
+                    System.out.println("Digite aqui: ");
+                    int op = leiaNumInt();
+                    if (op == 1 || op == 4) {
+                        System.out.println("Informe o novo nome: ");
+                        p.setNome(leia.nextLine());
+                    }
+                    if (op == 2 || op == 4) {
+                        System.out.println("Informe o novo endereço: ");
+                        p.setEndereco(leia.nextLine());
+                    }
+                    if (op == 3 || op == 4) {
+                        System.out.println("Informe o novo telefone: ");
+                        p.setTelefone(leia.nextLine());
+                    }
+                    if (op == 0) {
+                        System.out.println("Operação cancelada pelo usuário!");
+                        isCPF = false;
+                    }
+                    if (op < 0 || op > 4) {
+                        System.out.println("Opção inválida, tente novamente!");
+                    }
+                    while (isCPF);
+                } else {
+                    System.out.println("CPF não cadastrado!");
                     isCPF = false;
                 }
-            }else{
+                while (isCPF);
+                {
+                }
                 System.out.println("CPF inválido!");
                 System.out.println("Deseja tentar novamente? \n 1 - Sim | 2 - Não: ");
                 int op = leiaNumInt();
                 if (op == 1) {
                     isCPF = true;
-                }else{
-                    isCPF = false
+                } else {
+                    isCPF = false;
                 }
             }
-    }while (isCPF);
+        } while (isCPF);
+    }
 
     private static void editarCarro() {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     private static void listarPessoa() {
-        System.out.println("--Lista de Pessoas--"); 
-        for (Pessoa pessoa : cadPessoa.getPessoas()){
+        System.out.println("--Lista de Pessoas--");
+        for (Pessoa pessoa : cadPessoa.getPessoas()) {
             System.out.println(pessoa.toString());
+        }
     }
-    }
+
     private static void listarCarro() {
         System.out.println("-- Lista de Carros --");
-        for (Carro carro : cadCarro.getCarros()){
-            System.out.println(carro.toString());       
+        for (Carro carro : cadCarro.getCarros()) {
+            System.out.println(carro.toString());
         }
     }
 
@@ -230,9 +263,9 @@ public class INF3N212Carro {
             System.out.println("Informe o CPF da Pessoa a ser deletada ");
             String cpf = leia.nextLine();
             delCPF = Validadores.isCPF(cpf);
-            if(delCPF){
+            if (delCPF) {
                 Pessoa p = cadPessoa.getPessoaCPF(cpf);
-                if (p != null){
+                if (p != null) {
                     System.out.println("Deseja realmente deletar" + p.getNome() + "?");
                     System.out.println("1 - Sim | 2 - Não:");
                     int op = leiaNumInt();
@@ -240,33 +273,32 @@ public class INF3N212Carro {
                         cadPessoa.removePessoa(p);
                         System.out.println("Pessoa deletada com sucesso!");
                         delCPF = false;
-                    }else{
+                    } else {
                         System.out.println("Operação cancelada pelo usuário!");
                         delCPF = false;
                     }
-                }else{
+                } else {
                     System.out.println("CPF não cadastrado!");
                     System.out.println("Deseja tentar novamente?");
                     System.out.println("1 - Sim | 2 - Não: ");
                     int op = leiaNumInt();
                     if (op == 1) {
                         delCPF = true;
-                    }else{
+                    } else {
                         delCPF = false;
                     }
                 }
-            }else{
+            } else {
                 System.out.println("CPF inválido!"
-                + "\nTente novamente.1");
+                        + "\nTente novamente.1");
                 delCPF = true;
             }
         } while (delCPF);
-        
-       
+
     }
 
     private static void deletarCarro() {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }//fim classe
